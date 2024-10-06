@@ -1,0 +1,6 @@
+[client]
+showSidebarNavigation = false
+[server]
+runOnSave = true
+[theme]
+textColor = "#042940"
