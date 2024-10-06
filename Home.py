@@ -1,5 +1,6 @@
-#Fake news detector
-#importing dependencies
+##© 2024 Tushar Aggarwal. All rights reserved.(https://tushar-aggarwal.com)
+
+
 import streamlit as st
 from crewai import Agent, Task, Crew
 from langchain_groq import ChatGroq
@@ -7,10 +8,8 @@ import os
 from langchain_community.tools import DuckDuckGoSearchRun
 from dotenv import load_dotenv
 # Add this at the beginning of your app.py file
-
 st.set_page_config(page_title="Fake News Dector", page_icon="🇺🇸", layout="wide")
 
-#
 # Add a sidebar with information
 st.sidebar.title("About")
 st.sidebar.info(
@@ -54,10 +53,13 @@ st.title("Fake News Dector")
 news_input = st.text_area("Enter the news article to analyze:")
 
 
+        
+        
+# Add this after the imports
+from langchain_community.tools import DuckDuckGoSearchRun
 
 # Create the search tool
 search_tool = DuckDuckGoSearchRun()
-
 
 # Define the agents
 researcher = Agent(
@@ -77,12 +79,12 @@ fact_checker = Agent(
 )
 
 analyst = Agent(
-    role="News Analyst",
+    role="Political Analyst",
     goal="Analyze the news article for potential bias or false information",
-    backstory="You are a seasoned News analyst with expertise in identifying misinformation",
+    backstory="You are a seasoned political analyst with expertise in identifying misinformation",
     llm=ChatGroq(temperature=0, model_name="mixtral-8x7b-32768")
-
 )
+
 
 
 def create_tasks(news_article):
@@ -98,13 +100,12 @@ def create_tasks(news_article):
             expected_output="A list of verified and debunked claims from the article, with references to reliable sources."
         ),
         Task(
-            description="Analyze the article for potential bias, false information, or misleading content ",
+            description="Analyze the article for potential bias, false information, or misleading content related to the US 2024 election",
             agent=analyst,
-            expected_output="An analysis report detailing any identified biases, false information, or misleading content, with explanations."
+            expected_output="An analysis report detailing any identified biases, false information, or misleading content, with explanations and potential impacts on the election."
         )
     ]
-
-
+    
 
 if st.button("Analyze News", key="analyze_news_button"):
     if news_input:
@@ -127,48 +128,5 @@ if st.button("Analyze News", key="analyze_news_button"):
     else:
         st.warning("Please enter a news article to analyze.")
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        
